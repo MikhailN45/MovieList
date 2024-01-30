@@ -6,18 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.application.movielist.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment : Fragment() {
+
+    private lateinit var binding: FragmentMovieDetailsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_details, container, false)
+    ): View {
+        binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
 
-        val backButtonTextView: TextView = view.findViewById(R.id.back_button_text)
+        binding.backButtonText.setOnClickListener { goBack() }
 
-        return view
-
+        return binding.root
     }
+
+    private fun goBack() {
+        requireActivity().onBackPressed()
+    }
+
 }
