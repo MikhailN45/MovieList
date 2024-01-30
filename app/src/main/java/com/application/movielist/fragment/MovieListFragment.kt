@@ -1,11 +1,11 @@
-package com.application.movielist
+package com.application.movielist.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.application.movielist.contract.navigator
 import com.application.movielist.databinding.FragmentMovieListBinding
 
 class MovieListFragment : Fragment() {
@@ -24,13 +24,6 @@ class MovieListFragment : Fragment() {
     }
 
     private fun openFilmDetails() {
-        val fragment = MovieDetailsFragment()
-
-        parentFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragment_container_view, fragment)
-            .commit()
-
+        navigator().goMovieDetailsScreen()
     }
 }

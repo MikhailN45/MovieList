@@ -1,11 +1,11 @@
-package com.application.movielist
+package com.application.movielist.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.application.movielist.contract.navigator
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment : Fragment() {
@@ -24,7 +24,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun goBack() {
-        requireActivity().onBackPressed()
+        navigator().goBack()
     }
 
 }
