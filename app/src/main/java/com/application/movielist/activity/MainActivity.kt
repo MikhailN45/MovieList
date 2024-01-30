@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity(), Navigator {
         launchFragment(MovieDetailsFragment())
     }
 
-    override fun goBack() {
-        onBackPressed()
+    override fun goMovieListScreen() {
+        launchFragment(MovieListFragment())
     }
 
     private fun launchFragment(fragment: Fragment) {

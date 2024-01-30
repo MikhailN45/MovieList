@@ -9,5 +9,5 @@ fun Fragment.navigator(): Navigator {
 interface Navigator {
     fun goMovieDetailsScreen()
 
-    fun goBack()
+    fun goMovieListScreen()
 }

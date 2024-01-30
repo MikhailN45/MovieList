@@ -18,13 +18,13 @@ class MovieDetailsFragment : Fragment() {
     ): View {
         binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
 
-        binding.backButtonText.setOnClickListener { goBack() }
+        binding.backButtonText.setOnClickListener { goMovieListScreen() }
 
         return binding.root
     }
 
-    private fun goBack() {
-        navigator().goBack()
+    private fun goMovieListScreen() {
+        navigator().goMovieListScreen()
     }
 
 }
