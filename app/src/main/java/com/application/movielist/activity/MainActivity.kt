@@ -3,16 +3,16 @@ package com.application.movielist.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.application.movielist.fragment.MovieListFragment
 import com.application.movielist.R
-import com.application.movielist.contract.Navigator
 import com.application.movielist.databinding.ActivityMainBinding
 import com.application.movielist.fragment.MovieDetailsFragment
 
-class MainActivity : AppCompatActivity(), Navigator {
+class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsCL {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var rootFragment: MovieListFragment
+    private lateinit var detailsFragment: MovieDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,30 +20,30 @@ class MainActivity : AppCompatActivity(), Navigator {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            val fragment = MovieListFragment()
+            rootFragment = MovieListFragment.newInstance()
 
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_view, fragment)
+                .add(
+                    R.id.fragment_container_view,
+                    rootFragment,
+                    MovieListFragment.TAG
+                )
                 .commit()
+        } else {
+            val movieList = supportFragmentManager.findFragmentByTag(MovieListFragment.TAG)
+            rootFragment = movieList as MovieListFragment
 
+            val movieDetails = supportFragmentManager.findFragmentByTag(MovieDetailsFragment.TAG)
+            if (movieDetails != null) {
+                detailsFragment = movieDetails as MovieDetailsFragment
+            }
         }
     }
 
-    override fun goMovieDetailsScreen() {
-        launchFragment(MovieDetailsFragment())
+    override fun onBackClick() {
+        onBackPressed()
     }
-
-    override fun goMovieListScreen() {
-        launchFragment(MovieListFragment())
-    }
-
-    private fun launchFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.fragment_container_view, fragment)
-            .commit()
-    }
-
 }
+
+
 

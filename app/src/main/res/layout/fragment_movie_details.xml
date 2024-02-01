@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-   >
+    android:background="@drawable/bg">
 
     <ImageView
         android:id="@+id/mask"
@@ -180,117 +178,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storyline_tv" />
 
-
-    <ImageView
-        android:id="@+id/actor4_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/chris_hemsworth"
-        app:layout_constraintStart_toEndOf="@+id/actor3_img"
-        app:layout_constraintTop_toBottomOf="@+id/cast_title"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/actor4_name"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:fontFamily="@font/robotobold"
-        android:text="@string/chris_hemsworth"
-        android:textColor="@color/silver"
-        android:textFontWeight="900"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/actor3_name"
-        app:layout_constraintTop_toBottomOf="@+id/actor4_img"
-        tools:ignore="UnusedAttribute" />
-
-    <ImageView
-        android:id="@+id/actor3_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/mark_ruffalo"
-        app:layout_constraintStart_toEndOf="@+id/actor2_img"
-        app:layout_constraintTop_toBottomOf="@+id/cast_title"
-        tools:ignore="ContentDescription" />
-
-
-    <TextView
-        android:id="@+id/actor3_name"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:fontFamily="@font/robotobold"
-        android:text="@string/mark_ruffalo"
-        android:textColor="@color/silver"
-        android:textFontWeight="900"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/actor2_name"
-        app:layout_constraintTop_toBottomOf="@+id/actor3_img"
-        tools:ignore="UnusedAttribute" />
-
-
-    <ImageView
-        android:id="@+id/actor1_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/robert_downey_jr_"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/actor_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cast_title"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/cast_title" />
 
-    <TextView
-        android:id="@+id/actor1_name"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:fontFamily="@font/robotobold"
-        android:text="@string/robert_downey_jr"
-        android:textColor="@color/silver"
-        android:textFontWeight="900"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actor1_img"
-        tools:ignore="UnusedAttribute" />
-
-
-    <ImageView
-        android:id="@+id/actor2_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/chris_evans"
-        app:layout_constraintStart_toEndOf="@+id/actor1_img"
-        app:layout_constraintTop_toBottomOf="@+id/cast_title"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/actor2_name"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:fontFamily="@font/robotobold"
-        android:text="@string/chris_evans"
-        android:textColor="@color/silver"
-        android:textFontWeight="900"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/actor1_name"
-        app:layout_constraintTop_toBottomOf="@+id/actor2_img"
-        tools:ignore="UnusedAttribute" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

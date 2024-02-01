@@ -2,6 +2,7 @@
     <string name="app_name">MovieList</string>
     <string name="movie_details">Movie Details</string>
     <string name="avengers_end_game_title">Avengers: \nEnd Game</string>
+    <string name="avengers_end_game_title_movie_card">Avengers: End Game</string>
     <string name="back_button_text">Back</string>
     <string name="age_rating_13">13+</string>
     <string name="action_adventure_fantasy_genre">Action, Adventure, Fantasy</string>
