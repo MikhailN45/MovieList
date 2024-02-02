@@ -1,11 +1,15 @@
 package com.application.movielist.data
 data class MovieData(
-    val poster: Int,
-    val ageRating: Int,
-    val like: Int,
+    val id: Int,
     val title: String,
-    val length: Int,
-    val userRating: Int,
-    val reviews: Int,
-    val genres: List<String>
+    val overview: String,
+    val poster: String,
+    val backdrop: String,
+    val ratings: Int,
+    val numberOfRatings: Int,
+    val minimumAge: Int,
+    val runtime: Int,
+    val genres: List<GenreData>,
+    val actors: List<ActorData>,
+    val isLiked: Boolean
 )

@@ -1,6 +1,7 @@
 package com.application.movielist.data
 data class ActorData(
-    val actorImage: Int,
-    val actorName: String
+    val id: Int,
+    val name: String,
+    val picture: String
 )
 
