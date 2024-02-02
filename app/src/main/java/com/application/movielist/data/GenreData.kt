@@ -1,6 +1,6 @@
 package com.application.movielist.data
 
-data class GenreData (
+class GenreData(
     val id: Int,
     val name: String
 )
