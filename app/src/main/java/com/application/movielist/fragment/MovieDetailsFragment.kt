@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,46 +12,46 @@ import com.application.movielist.R
 import com.application.movielist.activity.MainActivity
 import com.application.movielist.adapters.ActorListAdapter
 import com.application.movielist.data.MovieData
+import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.bumptech.glide.Glide
 
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var movie: MovieData
-
+    private lateinit var binding: FragmentMovieDetailsBinding
     private var movieDetailsClick: MovieDetailsClick? = null
     private val actorListAdapter = ActorListAdapter()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_movie_details, container, false)//init binding
+    ): View {
+        binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val title = view.findViewById<TextView>(R.id.movie_title)
-        val poster = view.findViewById<ImageView>(R.id.mask)
-        val ageRating = view.findViewById<TextView>(R.id.age_rating_13)
-        val storyLine = view.findViewById<TextView>(R.id.storyline_tv)
+
         val movieId = arguments?.getInt(MovieListFragment.MOVIE_ID)
         movie = MainActivity.movies.single { it.id == movieId }
         actorListAdapter.updateActors(movie.actors)
-        view.findViewById<TextView>(R.id.back_button_text)
-            .setOnClickListener { movieDetailsClick?.onBackClick() }
 
-        view.findViewById<RecyclerView?>(R.id.actor_list_rv).apply {
-            adapter = actorListAdapter
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        with(binding) {
+            if (movie.actors.isEmpty())
+                castTitle.visibility = View.GONE
+            backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
+            actorListRv.apply {
+                adapter = actorListAdapter
+                layoutManager =
+                    LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            }
+            Glide.with(root).load(movie.backdrop).into(mask)
+            movieTitle.text = movie.title
+            ageRating13.text = getAgeRating(movie.minimumAge)
+            storylineTv.text = movie.overview
         }
-
-        if (movie.actors.isEmpty())
-            view.findViewById<TextView>(R.id.cast_title).visibility = View.GONE
-
-        Glide.with(view).load(movie.backdrop).into(poster)
-        title.text = movie.title
-        ageRating.text = getAgeRating(movie.minimumAge)
-        storyLine.text = movie.overview
     }
 
     override fun onAttach(context: Context) {
@@ -81,6 +79,4 @@ class MovieDetailsFragment : Fragment() {
             return fragment
         }
     }
-
-
 }

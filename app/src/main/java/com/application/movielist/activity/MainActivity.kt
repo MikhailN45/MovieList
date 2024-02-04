@@ -1,6 +1,5 @@
 package com.application.movielist.activity
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick
             val movieListFragment = supportFragmentManager.findFragmentByTag(MovieListFragment.TAG)
             rootFragment = movieListFragment as MovieListFragment
 
-            val movieDetailsFragment = supportFragmentManager.findFragmentByTag(MovieDetailsFragment.TAG)
+            val movieDetailsFragment =
+                supportFragmentManager.findFragmentByTag(MovieDetailsFragment.TAG)
             detailsFragment = movieDetailsFragment as MovieDetailsFragment
         }
     }
@@ -59,6 +59,3 @@ class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick
         var movies: List<MovieData> = listOf()
     }
 }
-
-
-

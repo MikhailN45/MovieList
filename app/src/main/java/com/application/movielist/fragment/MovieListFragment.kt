@@ -18,7 +18,6 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MovieListAdapter
-
     private var movies: List<MovieData> = listOf()
 
     companion object {
@@ -37,6 +36,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         movies = MainActivity.movies
         recyclerView = binding.movieListRv
         adapter = MovieListAdapter(this)
@@ -44,7 +44,6 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
             it.layoutManager = GridLayoutManager(requireContext(), 2)
             it.adapter = adapter
             adapter.updateMovies(movies)
-            super.onViewCreated(view, savedInstanceState)
         }
     }
 
@@ -62,4 +61,3 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
             .commit()
     }
 }
-
