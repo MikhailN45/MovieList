@@ -52,7 +52,7 @@ class MovieViewHolder(
         ageRating.setImageResource(Utils.getAgeRatingImg(movie.minimumAge))
         like.setImageResource(R.drawable.like)
         cardName.text = movie.title
-        ratingBar.rating = Utils.convertRating(movie.ratings)
+        ratingBar.rating = movie.ratings
         tagLine.text = Utils.getTags(movie.genres)
         reviews.text = "${movie.numberOfRatings} REVIEWS"
         minutes.text = "${movie.runtime} MIN"
