@@ -16,21 +16,20 @@ class ActorListAdapter : RecyclerView.Adapter<ActorListAdapter.ActorViewHolder>(
 
     private var actors: List<ActorData> = listOf()
 
-    class ActorViewHolder(private val listItem: View) : RecyclerView.ViewHolder(listItem) {
-        private val actorName: TextView = listItem.findViewById(R.id.actorName)
-        private val actorImage: ImageView = listItem.findViewById(R.id.actorImage)
-        fun bind(actor: ActorData) {
+    class ActorViewHolder(private val binding: ViewHolderActorBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(actor: ActorData) = with(binding) {
             actorName.text = actor.name
-            Glide.with(listItem).load(actor.picture).into(actorImage)
+            Glide.with(root).load(actor.picture).into(actorImage)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
-
-        return ActorViewHolder(
-            listItem = LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_holder_actor, parent, false)
-        )
+        //TODO(extract code to companion)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ViewHolderActorBinding.inflate(layoutInflater, parent, false)
+        return ActorViewHolder(binding)
     }
 
     override fun getItemCount(): Int = actors.size

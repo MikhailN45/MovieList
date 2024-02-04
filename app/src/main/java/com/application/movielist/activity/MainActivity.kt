@@ -11,28 +11,17 @@ import com.application.movielist.data.loadMovies
 import com.application.movielist.databinding.ActivityMainBinding
 import com.application.movielist.fragment.MovieDetailsFragment
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsCL {
+class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var rootFragment: MovieListFragment
     private lateinit var detailsFragment: MovieDetailsFragment
 
-    companion object {
-        var movies: List<MovieData> = listOf()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        lifecycleScope.launch {
-            val coroutine = async(Dispatchers.IO) {
-                movies = loadMovies(applicationContext)
-            }
-            coroutine.await()
-        }
+        loadMovies()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,18 +37,26 @@ class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsCL {
                 )
                 .commit()
         } else {
-            val movieList = supportFragmentManager.findFragmentByTag(MovieListFragment.TAG)
-            rootFragment = movieList as MovieListFragment
+            val movieListFragment = supportFragmentManager.findFragmentByTag(MovieListFragment.TAG)
+            rootFragment = movieListFragment as MovieListFragment
 
-            val movieDetails = supportFragmentManager.findFragmentByTag(MovieDetailsFragment.TAG)
-            if (movieDetails != null) {
-                detailsFragment = movieDetails as MovieDetailsFragment
-            }
+            val movieDetailsFragment = supportFragmentManager.findFragmentByTag(MovieDetailsFragment.TAG)
+            detailsFragment = movieDetailsFragment as MovieDetailsFragment
         }
     }
 
     override fun onBackClick() {
         onBackPressed()
+    }
+
+    private fun loadMovies() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            movies = loadMovies(applicationContext)
+        }
+    }
+
+    companion object {
+        var movies: List<MovieData> = listOf()
     }
 }
 
