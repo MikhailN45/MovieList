@@ -1,5 +1,6 @@
 package com.application.movielist.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,6 +32,7 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,6 +53,7 @@ class MovieDetailsFragment : Fragment() {
             movieTitle.text = movie.title
             ageRating13.text = getAgeRating(movie.minimumAge)
             storylineTv.text = movie.overview
+            reviewsCount.text = "${movie.numberOfRatings} REVIEWS"
         }
     }
 
