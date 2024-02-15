@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
@@ -12,13 +13,14 @@ import com.application.movielist.activity.MainActivity
 import com.application.movielist.adapters.MovieListAdapter
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieListBinding
+import com.application.movielist.viewmodels.ViewModelMovieList
 
 class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
 
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MovieListAdapter
-    private var movies: List<MovieData> = listOf()
+    private val viewModelMovieList: ViewModelMovieList by viewModels()
+    private var progressBar: View? = null
 
     companion object {
         const val TAG = "MovieListFragment"
@@ -37,13 +39,17 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        movies = MainActivity.movies
+        viewModelMovieList.getMovies()
         recyclerView = binding.movieListRv
-        adapter = MovieListAdapter(this)
         recyclerView.let {
             it.layoutManager = GridLayoutManager(requireContext(), 2)
-            it.adapter = adapter
-            adapter.updateMovies(movies)
+            it.adapter = MovieListAdapter(this)
+        }
+        viewModelMovieList.movieListLiveData.observe(viewLifecycleOwner) {
+            (recyclerView.adapter as MovieListAdapter).updateMovies(it)
+        }
+        viewModelMovieList.loadingLiveData.observe(viewLifecycleOwner) {
+            progressBar?.visibility = if (it) View.VISIBLE else View.GONE
         }
     }
 

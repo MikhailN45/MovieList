@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadMovies()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -47,15 +45,5 @@ class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick
 
     override fun onBackClick() {
         onBackPressed()
-    }
-
-    private fun loadMovies() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            movies = loadMovies(applicationContext)
-        }
-    }
-
-    companion object {
-        var movies: List<MovieData> = listOf()
     }
 }

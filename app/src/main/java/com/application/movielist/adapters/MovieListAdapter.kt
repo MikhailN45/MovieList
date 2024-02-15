@@ -18,7 +18,6 @@ class MovieListAdapter(private val movieClickListener: MovieClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ViewHolderMovieBinding.inflate(inflater, parent, false)
-
         return MovieViewHolder(movieClickListener, binding)
     }
 

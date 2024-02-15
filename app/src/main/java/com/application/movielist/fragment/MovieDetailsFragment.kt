@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
@@ -14,6 +15,7 @@ import com.application.movielist.activity.MainActivity
 import com.application.movielist.adapters.ActorListAdapter
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
+import com.application.movielist.viewmodels.ViewModelMovieDetails
 import com.bumptech.glide.Glide
 
 class MovieDetailsFragment : Fragment() {
@@ -22,6 +24,7 @@ class MovieDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailsBinding
     private var movieDetailsClick: MovieDetailsClick? = null
     private val actorListAdapter = ActorListAdapter()
+    private val viewModelMovieDetails: ViewModelMovieDetails by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,28 +35,32 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val movieId = arguments?.getInt(MovieListFragment.MOVIE_ID)
-        movie = MainActivity.movies.single { it.id == movieId }
-        actorListAdapter.updateActors(movie.actors)
 
-        with(binding) {
-            if (movie.actors.isEmpty())
-                castTitle.visibility = View.GONE
-            backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
-            actorListRv.apply {
-                adapter = actorListAdapter
-                layoutManager =
-                    LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        viewModelMovieDetails.getMovie(movieId!!)
+
+        viewModelMovieDetails.movieLiveData.observe(viewLifecycleOwner) { movie: MovieData ->
+            with(binding) {
+                if (movie.actors.isEmpty())
+                    castTitle.visibility = View.GONE
+                backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
+
+                actorListRv.apply {
+                    adapter = actorListAdapter
+                    layoutManager =
+                        LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+                }
+
+                Glide.with(root).load(movie.backdrop).into(mask)
+                movieTitle.text = movie.title
+                ageRating13.text = getAgeRating(movie.minimumAge)
+                storylineTv.text = movie.overview
+                val reviewsCountText = "${movie.numberOfRatings} REVIEWS"
+                reviewsCount.text = reviewsCountText
+                actorListAdapter.updateActors(movie.actors)
             }
-            Glide.with(root).load(movie.backdrop).into(mask)
-            movieTitle.text = movie.title
-            ageRating13.text = getAgeRating(movie.minimumAge)
-            storylineTv.text = movie.overview
-            reviewsCount.text = "${movie.numberOfRatings} REVIEWS"
         }
     }
 
