@@ -2,15 +2,10 @@ package com.application.movielist.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import com.application.movielist.fragment.MovieListFragment
 import com.application.movielist.R
-import com.application.movielist.data.MovieData
-import com.application.movielist.data.loadMovies
 import com.application.movielist.databinding.ActivityMainBinding
 import com.application.movielist.fragment.MovieDetailsFragment
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick {
 
@@ -44,6 +39,6 @@ class MainActivity : AppCompatActivity(), MovieDetailsFragment.MovieDetailsClick
     }
 
     override fun onBackClick() {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
     }
 }
