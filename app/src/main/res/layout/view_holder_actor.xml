@@ -22,7 +22,7 @@
         android:id="@+id/actorName"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/robotobold"
+        android:fontFamily="@font/roboto_bold"
         android:gravity="center_vertical"
         android:lineSpacingExtra="2sp"
         android:text="@string/robert_downey_jr"

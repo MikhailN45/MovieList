@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="55dp"
-        android:fontFamily="@font/robotobold"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/movies_list"
         android:textColor="@color/textColorWhite"
         android:textFontWeight="900"
