@@ -1,6 +1,5 @@
 package com.application.movielist.fragment
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
-import com.application.movielist.activity.MainActivity
 import com.application.movielist.adapters.ActorListAdapter
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
@@ -20,7 +18,6 @@ import com.bumptech.glide.Glide
 
 class MovieDetailsFragment : Fragment() {
 
-    private lateinit var movie: MovieData
     private lateinit var binding: FragmentMovieDetailsBinding
     private var movieDetailsClick: MovieDetailsClick? = null
     private val actorListAdapter = ActorListAdapter()

@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
-import com.application.movielist.activity.MainActivity
 import com.application.movielist.adapters.MovieListAdapter
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieListBinding
