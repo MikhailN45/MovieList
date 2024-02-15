@@ -1,5 +1,6 @@
 package com.application.movielist.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.application.movielist.R
+import com.application.movielist.activity.MainActivity
 import com.application.movielist.adapters.ActorListAdapter
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
-import com.application.movielist.utils.Utils
 import com.application.movielist.viewmodels.ViewModelMovieDetails
 import com.bumptech.glide.Glide
 
 class MovieDetailsFragment : Fragment() {
 
+    private lateinit var movie: MovieData
     private lateinit var binding: FragmentMovieDetailsBinding
     private var movieDetailsClick: MovieDetailsClick? = null
     private val actorListAdapter = ActorListAdapter()
@@ -52,7 +55,7 @@ class MovieDetailsFragment : Fragment() {
 
                 Glide.with(root).load(movie.backdrop).into(mask)
                 movieTitle.text = movie.title
-                ageRating13.text = Utils.getRatingStringInt(movie.minimumAge)
+                ageRating13.text = getAgeRating(movie.minimumAge)
                 storylineTv.text = movie.overview
                 val reviewsCountText = "${movie.numberOfRatings} REVIEWS"
                 reviewsCount.text = reviewsCountText
@@ -70,6 +73,12 @@ class MovieDetailsFragment : Fragment() {
 
     interface MovieDetailsClick {
         fun onBackClick()
+    }
+
+    private fun getAgeRating(minimumAge: Int): String {
+        val setAgeView: Int =
+            if (minimumAge < 16) R.string.age_rating_13 else R.string.age_rating_16
+        return getString(setAgeView)
     }
 
     companion object {
