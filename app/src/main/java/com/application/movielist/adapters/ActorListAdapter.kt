@@ -16,8 +16,8 @@ class ActorListAdapter : RecyclerView.Adapter<ActorListAdapter.ActorViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(actor: ActorData) = with(binding) {
-            actorName.text = actor.name
-            Glide.with(root).load(actor.picture).into(actorImage)
+            actorName.text = actor.nameRu
+            Glide.with(root).load(actor.posterUrl).into(actorImage)
         }
     }
 
