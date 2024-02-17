@@ -4,14 +4,13 @@ import com.application.movielist.R
 import com.application.movielist.data.GenreData
 
 object Utils {
-    fun getTags(genres: List<GenreData>): String = genres.joinToString(", ") { it.name }
 
-    fun getAgeRatingImg(minimumAge: Int): Int =
-        if (minimumAge >= 16) R.drawable.rating16 else R.drawable.rating13
+    fun getTags(genres: List<GenreData>): String = genres.joinToString(", ") { it.genre }
 
-    fun getRatingStringInt(minimumAge: Int): String {
-        val age: Int =
-            if (minimumAge >= 16) 16 else 13
-        return age.toString().plus("+")
+    fun getAgeRatingImg(minimumAge: String): Int =
+        if (minimumAge == "age16") R.drawable.rating16 else R.drawable.rating13
+
+    fun getRatingStringInt(minimumAge: String): String {
+        return if (minimumAge == "age16") "16+" else "13+"
     }
 }

@@ -54,7 +54,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
 
     override fun onMovieClick(movie: MovieData) {
         val bundle = Bundle()
-        bundle.putInt(MOVIE_ID, movie.id)
+        bundle.putInt(MOVIE_ID, movie.kinopoiskId)
         requireActivity().supportFragmentManager
             .beginTransaction()
             .add(

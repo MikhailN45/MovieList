@@ -50,11 +50,11 @@ class MovieDetailsFragment : Fragment() {
                         LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
                 }
 
-                Glide.with(root).load(movie.backdrop).into(mask)
-                movieTitle.text = movie.title
-                ageRating13.text = Utils.getRatingStringInt(movie.minimumAge)
-                storylineTv.text = movie.overview
-                val reviewsCountText = "${movie.numberOfRatings} REVIEWS"
+                Glide.with(root).load(movie.coverUrl).into(mask)
+                movieTitle.text = movie.nameRu
+                ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
+                storylineTv.text = movie.shortDescription
+                val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
                 reviewsCount.text = reviewsCountText
                 actorListAdapter.updateActors(movie.actors)
             }

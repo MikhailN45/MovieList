@@ -46,15 +46,15 @@ class MovieViewHolder(
     fun bind(movie: MovieData) = with(binding) {
         Glide
             .with(binding.root)
-            .load(movie.poster)
+            .load(movie.posterUrl)
             .into(moviePreview)
-        ageRating.setImageResource(Utils.getAgeRatingImg(movie.minimumAge))
+        ageRating.setImageResource(Utils.getAgeRatingImg(movie.ratingAgeLimits))
         like.setImageResource(R.drawable.like)
-        cardName.text = movie.title
-        ratingBar.rating = movie.ratings
+        cardName.text = movie.nameRu
+        ratingBar.rating = movie.ratingKinopoisk/2
         tagLine.text = Utils.getTags(movie.genres)
-        reviews.text = "${movie.numberOfRatings} REVIEWS"
-        minutes.text = "${movie.runtime} MIN"
+        reviews.text = "${movie.ratingKinopoiskVoteCount} REVIEWS"
+        minutes.text = "${movie.filmLength} MIN"
         movieClick.setOnClickListener { clickListener.onMovieClick(movie) }
     }
 }
