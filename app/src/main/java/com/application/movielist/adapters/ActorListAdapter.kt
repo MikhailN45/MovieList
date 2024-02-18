@@ -4,38 +4,38 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.application.movielist.data.ActorData
-import com.application.movielist.databinding.ViewHolderActorBinding
+import com.application.movielist.data.FootageData
+import com.application.movielist.databinding.ViewHolderFootageBinding
 import com.bumptech.glide.Glide
 
-class ActorListAdapter : RecyclerView.Adapter<ActorListAdapter.ActorViewHolder>() {
+class ActorListAdapter : RecyclerView.Adapter<ActorListAdapter.FootageViewHolder>() {
 
-    private var actors: List<ActorData> = listOf()
+    private var footage: List<FootageData> = listOf()
 
-    class ActorViewHolder(private val binding: ViewHolderActorBinding) :
+    class FootageViewHolder(private val binding: ViewHolderFootageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(actor: ActorData) = with(binding) {
-            actorName.text = actor.nameRu
-            Glide.with(root).load(actor.posterUrl).into(actorImage)
+        fun bind(footage: FootageData) = with(binding) {
+            Glide.with(root).load(footage.previewUrl).into(footageImage)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FootageViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ViewHolderActorBinding.inflate(layoutInflater, parent, false)
-        return ActorViewHolder(binding)
+        val binding = ViewHolderFootageBinding.inflate(layoutInflater, parent, false)
+        return FootageViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = actors.size
+    override fun getItemCount(): Int = footage.size
 
-    override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
-        holder.bind(actors[position])
+    override fun onBindViewHolder(holder: FootageViewHolder, position: Int) {
+        holder.bind(footage[position])
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateActors(newActors: List<ActorData>) {
-        actors = newActors
+    fun updateFootage(newPictures: List<FootageData>) {
+        footage = newPictures
         notifyDataSetChanged()
+
     }
 }

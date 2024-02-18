@@ -40,8 +40,8 @@ class MovieDetailsFragment : Fragment() {
 
         viewModelMovieDetails.movieLiveData.observe(viewLifecycleOwner) { movie: MovieData ->
             with(binding) {
-                if (movie.actors.isEmpty())
-                    castTitle.visibility = View.GONE
+                if (movie.footage.isEmpty())
+                    footageTitle.visibility = View.GONE
                 backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
 
                 actorListRv.apply {
@@ -56,7 +56,7 @@ class MovieDetailsFragment : Fragment() {
                 storylineTv.text = movie.shortDescription
                 val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
                 reviewsCount.text = reviewsCountText
-                actorListAdapter.updateActors(movie.actors)
+                actorListAdapter.updateFootage(movie.footage)
             }
         }
     }

@@ -10,7 +10,7 @@ data class MovieData(
     val ratingAgeLimits: String,
     val filmLength: Int,
     val genres: List<GenreData>,
-    val actors: List<ActorData>,
+    val footage: List<FootageData>,
     val isLiked: Boolean = false
 )
 
@@ -19,8 +19,6 @@ data class GenreData(
     val genre: String
 )
 
-data class ActorData(
-    val personId: Int,
-    val nameRu: String,
-    val posterUrl: String
+data class FootageData(
+    val previewUrl: String
 )

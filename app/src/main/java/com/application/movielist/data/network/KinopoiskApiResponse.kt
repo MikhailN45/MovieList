@@ -17,6 +17,6 @@ interface KinopoiskApiResponse {
     suspend fun getMovieDetails(@Path("id") id: Int)
 
     @Headers("x-api-key: $API_KEY")
-    @GET("api/v1/staff?filmId={id}")
-    suspend fun getActors(@Path("id") id: Int)
+    @GET("api/v2.2/films/{id}/images?type=STILL&page=1")
+    suspend fun getMovieFootage(@Path("id") id: Int)
 }

@@ -25,4 +25,5 @@
     <string name="avengers_end_game_onestring">Avengers: End Game</string>
     <string name="age_rating_16">16+</string>
     <string name="movie_details_screen">Movie Details Screen</string>
+    <string name="movie_footage">movie footage</string>
 </resources>
