@@ -8,7 +8,7 @@ import com.application.movielist.data.FootageData
 import com.application.movielist.databinding.ViewHolderFootageBinding
 import com.bumptech.glide.Glide
 
-class ActorListAdapter : RecyclerView.Adapter<ActorListAdapter.FootageViewHolder>() {
+class FootageListAdapter : RecyclerView.Adapter<FootageListAdapter.FootageViewHolder>() {
 
     private var footage: List<FootageData> = listOf()
 

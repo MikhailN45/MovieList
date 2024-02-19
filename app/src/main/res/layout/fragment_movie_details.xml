@@ -32,10 +32,10 @@
             android:layout_height="10dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="60dp"
+            android:contentDescription="@string/back_button_text"
             android:src="@drawable/path"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/back_button_text" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/back_button_text"
@@ -71,7 +71,6 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/roboto_bold"
-            tools:text="@string/age_rating_13"
             android:textColor="@color/textColorWhite"
             android:textFontWeight="900"
             android:textSize="12sp"
@@ -80,7 +79,8 @@
             app:layout_constraintEnd_toEndOf="@+id/black_rectangle"
             app:layout_constraintStart_toStartOf="@+id/black_rectangle"
             app:layout_constraintTop_toTopOf="@+id/black_rectangle"
-            tools:targetApi="p" />
+            tools:targetApi="p"
+            tools:text="@string/age_rating_13" />
 
         <TextView
             android:id="@+id/movie_title"
@@ -90,7 +90,6 @@
             android:layout_marginTop="300dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto_bold"
-            tools:text="@string/avengers_end_game_title"
             android:textColor="@color/textColorWhite"
             android:textFontWeight="900"
             android:textSize="40sp"
@@ -98,7 +97,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="p" />
+            tools:targetApi="p"
+            tools:text="@string/avengers_end_game_title" />
 
         <TextView
             android:id="@+id/movie_genres"
@@ -107,13 +107,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            tools:text="@string/action_adventure_fantasy_genre"
             android:textColor="@color/textColorRed"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+            app:layout_constraintTop_toBottomOf="@+id/movie_title"
+            tools:text="@string/action_adventure_fantasy_genre" />
 
 
         <TextView
@@ -123,13 +123,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_bold"
-            tools:text="@string/reviews_number"
             android:textColor="@color/silver"
             android:textFontWeight="900"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_genres"
-            tools:targetApi="p" />
+            tools:targetApi="p"
+            tools:text="@string/reviews_number" />
 
         <TextView
             android:id="@+id/storyline_title"
@@ -157,7 +157,6 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto_thin"
-            tools:text="@string/avengers_storyline"
             android:textColor="@color/textColorGray"
             android:textFontWeight="300"
             android:textSize="14sp"
@@ -166,7 +165,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/storyline_title"
-            tools:targetApi="p" />
+            tools:targetApi="p"
+            tools:text="@string/avengers_storyline" />
 
 
         <TextView
@@ -191,7 +191,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/footage_title"/>
+            app:layout_constraintTop_toBottomOf="@+id/footage_title" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back_button_text"
+            app:layout_constraintVertical_bias="0.45"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

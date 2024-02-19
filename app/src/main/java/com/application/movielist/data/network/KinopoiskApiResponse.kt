@@ -1,5 +1,6 @@
 package com.application.movielist.data.network
 
+import com.application.movielist.data.FootageData
 import com.application.movielist.data.MovieData
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -18,5 +19,5 @@ interface KinopoiskApiResponse {
 
     @Headers("x-api-key: $API_KEY")
     @GET("api/v2.2/films/{id}/images?type=STILL&page=1")
-    suspend fun getMovieFootage(@Path("id") id: Int)
+    suspend fun getMovieFootage(@Path("id") id: Int): FootageData
 }

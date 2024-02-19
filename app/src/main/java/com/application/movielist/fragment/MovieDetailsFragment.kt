@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.application.movielist.adapters.ActorListAdapter
+import com.application.movielist.adapters.FootageListAdapter
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.application.movielist.utils.Utils
@@ -20,7 +20,7 @@ class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieDetailsBinding
     private var movieDetailsClick: MovieDetailsClick? = null
-    private val actorListAdapter = ActorListAdapter()
+    private val footageListAdapter = FootageListAdapter()
     private val viewModelMovieDetails: ViewModelMovieDetails by viewModels()
 
     override fun onCreateView(
@@ -45,7 +45,7 @@ class MovieDetailsFragment : Fragment() {
                 backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
 
                 actorListRv.apply {
-                    adapter = actorListAdapter
+                    adapter = footageListAdapter
                     layoutManager =
                         LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
                 }
@@ -56,7 +56,7 @@ class MovieDetailsFragment : Fragment() {
                 storylineTv.text = movie.shortDescription
                 val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
                 reviewsCount.text = reviewsCountText
-                actorListAdapter.updateFootage(movie.footage)
+                footageListAdapter.updateFootage(movie.footage)
             }
         }
     }

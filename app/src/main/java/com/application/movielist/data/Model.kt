@@ -1,4 +1,8 @@
 package com.application.movielist.data
+
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class MovieData(
     val kinopoiskId: Int,
     val nameRu: String,
@@ -14,11 +18,13 @@ data class MovieData(
     val isLiked: Boolean = false
 )
 
+@Serializable
 data class GenreData(
     val id: Int,
     val genre: String
 )
 
+@Serializable
 data class FootageData(
     val previewUrl: String
 )
