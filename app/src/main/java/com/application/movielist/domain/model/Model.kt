@@ -1,10 +1,10 @@
-package com.application.movielist.data
+package com.application.movielist.domain.model
 
-data class MoviesResponse(
-    val movies: List<MovieDataResponse>
+data class Movies(
+    val movies: List<MovieData>
 )
 
-data class MovieDataResponse(
+data class MovieData(
     val filmId: Int,
     val nameRu: String,
     val posterUrl: String,
@@ -12,29 +12,28 @@ data class MovieDataResponse(
     val ratingKinopoiskVoteCount: Int,
     val ratingAgeLimits: String,
     val filmLength: Int,
-    val genres: List<GenreDataResponse>,
+    val genres: List<GenreData>,
     val isLiked: Boolean = false
 )
 
-data class MovieInfoResponse(
+data class MovieInfo(
     val kinopoiskId: Int,
     val nameRu: String,
     val coverUrl: String,
     val ratingKinopoiskVoteCount: Int,
     val ratingAgeLimits: String,
     val shortDescription: String,
-    val genres: List<GenreDataResponse>
+    val genres: List<GenreData>
 )
 
-data class FootageResponse(
-    val footage: List<FootageDataResponse>
+data class Footage(
+    val footage: List<FootageData>
 )
 
-data class FootageDataResponse(
+data class FootageData(
     val previewUrl: String
 )
 
-data class GenreDataResponse(
+data class GenreData(
     val genre: String
 )
-

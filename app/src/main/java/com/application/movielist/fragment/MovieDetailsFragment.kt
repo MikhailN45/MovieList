@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.adapters.FootageListAdapter
-import com.application.movielist.data.MovieData
+import com.application.movielist.data.MovieDataResponse
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.application.movielist.utils.Utils
 import com.application.movielist.viewmodels.ViewModelMovieDetails
@@ -38,7 +38,7 @@ class MovieDetailsFragment : Fragment() {
 
         viewModelMovieDetails.getMovie(movieId!!)
 
-        viewModelMovieDetails.movieLiveData.observe(viewLifecycleOwner) { movie: MovieData ->
+        viewModelMovieDetails.movieLiveData.observe(viewLifecycleOwner) { movie: MovieDataResponse ->
             with(binding) {
                 if (movie.footage.isEmpty())
                     footageTitle.visibility = View.GONE
