@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.movielist.data.Footage
 import com.application.movielist.data.FootageList
 import com.application.movielist.data.MovieInfo
 import com.application.movielist.repository.Repository

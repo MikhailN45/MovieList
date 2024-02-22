@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
-import com.application.movielist.adapters.FootageListAdapter
 import com.application.movielist.adapters.MovieListAdapter
 import com.application.movielist.data.MovieDataResponse
 import com.application.movielist.databinding.FragmentMovieListBinding

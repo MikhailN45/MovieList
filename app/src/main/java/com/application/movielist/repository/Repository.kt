@@ -1,13 +1,9 @@
 package com.application.movielist.repository
 
-import com.application.movielist.data.Footage
 import com.application.movielist.data.FootageList
-import com.application.movielist.data.MovieData
 import com.application.movielist.data.MovieInfo
 import com.application.movielist.data.MoviesList
 import com.application.movielist.data.network.RetrofitInstance
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class Repository {
 

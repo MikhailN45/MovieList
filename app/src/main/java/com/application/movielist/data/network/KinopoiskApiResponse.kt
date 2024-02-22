@@ -1,6 +1,5 @@
 package com.application.movielist.data.network
 
-import com.application.movielist.data.Footage
 import com.application.movielist.data.FootageList
 import com.application.movielist.data.MovieInfo
 import com.application.movielist.data.MoviesList
