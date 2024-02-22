@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
 import com.application.movielist.adapters.MovieListAdapter
-import com.application.movielist.data.MovieDataResponse
+import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.FragmentMovieListBinding
 import com.application.movielist.repository.Repository
 import com.application.movielist.viewmodels.MovieListViewModelFactory
@@ -57,9 +57,9 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
         }
     }
 
-    override fun onMovieClick(movie: MovieDataResponse) {
+    override fun onMovieClick(movie: MovieData) {
         val bundle = Bundle()
-        bundle.putInt(MOVIE_ID, movie.filmId)
+        bundle.putInt(MOVIE_ID, movie.kinopoiskId)
         requireActivity().supportFragmentManager
             .beginTransaction()
             .add(
