@@ -6,22 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.adapters.FootageListAdapter
-import com.application.movielist.data.MovieDataResponse
+import com.application.movielist.data.FootageList
+import com.application.movielist.data.MovieInfo
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
+import com.application.movielist.repository.Repository
 import com.application.movielist.utils.Utils
+import com.application.movielist.viewmodels.MovieDetailsViewModelFactory
 import com.application.movielist.viewmodels.ViewModelMovieDetails
 import com.bumptech.glide.Glide
 
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieDetailsBinding
+    private lateinit var viewModel: ViewModelMovieDetails
     private var movieDetailsClick: MovieDetailsClick? = null
     private val footageListAdapter = FootageListAdapter()
-    private val viewModelMovieDetails: ViewModelMovieDetails by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,22 +38,35 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movieId = arguments?.getInt(MovieListFragment.MOVIE_ID)
+        val repository = Repository()
+        val viewModelFactory = MovieDetailsViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ViewModelMovieDetails::class.java]
 
-        viewModelMovieDetails.getMovie(movieId!!)
+        viewModel.getMovie(movieId!!)
 
-        viewModelMovieDetails.movieLiveData.observe(viewLifecycleOwner) { movie: MovieDataResponse ->
+        viewModel.footageLiveData.observe(viewLifecycleOwner) { movie: FootageList ->
             with(binding) {
-                if (movie.footage.isEmpty())
+                if (movie.pictures.isEmpty())
                     footageTitle.visibility = View.GONE
+            }
+
+            viewModel.loadingLiveData.observe(viewLifecycleOwner) {
+                binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        }
+
+
+        viewModel.movieLiveData.observe(viewLifecycleOwner) { movie: MovieInfo ->
+            with(binding) {
                 backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
 
-                actorListRv.apply {
+                footageListRv.apply {
                     adapter = footageListAdapter
                     layoutManager =
                         LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
                 }
 
-                Glide.with(root).load(movie.coverUrl).into(mask)
+                Glide.with(root).load(movie.posterUrl).into(mask)
                 movieTitle.text = movie.nameRu
                 ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
                 storylineTv.text = movie.shortDescription
@@ -60,6 +76,7 @@ class MovieDetailsFragment : Fragment() {
             }
         }
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

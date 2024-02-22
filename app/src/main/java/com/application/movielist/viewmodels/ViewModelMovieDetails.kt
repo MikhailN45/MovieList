@@ -1,33 +1,40 @@
 package com.application.movielist.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.movielist.domain.interactors.MovieInteractor
-import com.application.movielist.states.MovieDetailsUiState
+import com.application.movielist.data.Footage
+import com.application.movielist.data.FootageList
+import com.application.movielist.data.MovieInfo
+import com.application.movielist.repository.Repository
 import kotlinx.coroutines.launch
 
-class ViewModelMovieDetails(private val interactor: MovieInteractor) : ViewModel() {
-    private val _state = MutableLiveData<MovieDetailsUiState>()
-    val state: LiveData<MovieDetailsUiState> = _state
+class ViewModelMovieDetails(private val repository: Repository) : ViewModel() {
+    private var _movieLiveData: MutableLiveData<MovieInfo> = MutableLiveData<MovieInfo>()
+    val movieLiveData: LiveData<MovieInfo>
+        get() = _movieLiveData
 
-    private var movieId: Int = 0
-        set(value) {
-            field = value
-            getMovie()
-        }
+    private var _footageLiveData: MutableLiveData<FootageList> = MutableLiveData<FootageList>()
+    val footageLiveData: LiveData<FootageList>
+        get() = _footageLiveData
 
+    private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingLiveData: LiveData<Boolean>
+        get() = _loadingLiveData
 
-    private fun getMovie() {
+    fun getMovie(movieId: Int) {
         viewModelScope.launch {
-            _state.value = MovieDetailsUiState.Loading
+            _loadingLiveData.value = true
             try {
-                val filmInfo = interactor.getFilmDetails(movieId)
-                MovieDetailsUiState.Success(filmInfo)
+                _movieLiveData.value = repository.getMovieDetails(movieId)
+                _footageLiveData.value = repository.getMovieFootage(movieId)
             } catch (exception: Exception) {
-                _state.value = MovieDetailsUiState.Error
+                Log.d("TAG", exception.toString())
             }
+
         }
+        _loadingLiveData.value = false
     }
 }

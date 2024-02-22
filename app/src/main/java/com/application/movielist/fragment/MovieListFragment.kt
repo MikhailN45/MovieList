@@ -5,20 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
+import com.application.movielist.adapters.FootageListAdapter
 import com.application.movielist.adapters.MovieListAdapter
 import com.application.movielist.data.MovieDataResponse
 import com.application.movielist.databinding.FragmentMovieListBinding
+import com.application.movielist.repository.Repository
+import com.application.movielist.viewmodels.MovieListViewModelFactory
 import com.application.movielist.viewmodels.ViewModelMovieList
 
 class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
 
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var recyclerView: RecyclerView
-    private val viewModelMovieList: ViewModelMovieList by viewModels()
+    private lateinit var viewModel: ViewModelMovieList
     private var progressBar: View? = null
 
     companion object {
@@ -38,16 +42,19 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelMovieList.getMovies()
+        val repository = Repository()
+        val viewModelFactory = MovieListViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ViewModelMovieList::class.java]
+        viewModel.getMovies()
         recyclerView = binding.movieListRv
         recyclerView.let {
             it.layoutManager = GridLayoutManager(requireContext(), 2)
             it.adapter = MovieListAdapter(this)
         }
-        viewModelMovieList.movieListLiveData.observe(viewLifecycleOwner) {
-            (recyclerView.adapter as MovieListAdapter).updateMovies(it)
+        viewModel.movieListLiveData.observe(viewLifecycleOwner) {
+            (recyclerView.adapter as MovieListAdapter).submitList(viewModel.movieListLiveData.value)
         }
-        viewModelMovieList.loadingLiveData.observe(viewLifecycleOwner) {
+        viewModel.loadingLiveData.observe(viewLifecycleOwner) {
             progressBar?.visibility = if (it) View.VISIBLE else View.GONE
         }
     }

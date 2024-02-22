@@ -1,32 +1,33 @@
 package com.application.movielist.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.movielist.domain.interactors.MovieInteractor
-import com.application.movielist.states.MovieListUiState
+import com.application.movielist.data.MovieData
+import com.application.movielist.repository.Repository
 import kotlinx.coroutines.launch
-import kotlin.Exception
 
-class ViewModelMovieList(private val interactor: MovieInteractor) : ViewModel() {
-    private val _state = MutableLiveData<MovieListUiState>()
-    val state: LiveData<MovieListUiState> = _state
+class ViewModelMovieList(private val repository: Repository) : ViewModel() {
+    private var _movieListLiveData: MutableLiveData<List<MovieData>> = MutableLiveData()
+    val movieListLiveData: LiveData<List<MovieData>>
+        get() = _movieListLiveData
 
-    init {
-        getMovies()
-    }
+    private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingLiveData: LiveData<Boolean>
+        get() = _loadingLiveData
 
     fun getMovies() {
-
         viewModelScope.launch {
-            _state.value = MovieListUiState.Loading
+            _loadingLiveData.postValue(true)
             try {
-                val movies = interactor.getActualMovies().movies
-                _state.value = MovieListUiState.Success(movies)
-            } catch (exception: Exception) {
-                _state.value = MovieListUiState.Error
+                _movieListLiveData.postValue(repository.getActualMovies().result)
             }
+            catch (exception: Exception) {
+                Log.d("TAG", exception.toString())
+            }
+            _loadingLiveData.postValue(false)
         }
     }
 }

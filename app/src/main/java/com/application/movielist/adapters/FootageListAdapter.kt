@@ -4,18 +4,18 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.application.movielist.data.FootageDataResponse
+import com.application.movielist.data.Footage
 import com.application.movielist.databinding.ViewHolderFootageBinding
 import com.bumptech.glide.Glide
 
 class FootageListAdapter : RecyclerView.Adapter<FootageListAdapter.FootageViewHolder>() {
 
-    private var footage: List<FootageDataResponse> = listOf()
+    private var footage: List<Footage> = listOf()
 
     class FootageViewHolder(private val binding: ViewHolderFootageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(footage: FootageDataResponse) = with(binding) {
+        fun bind(footage: Footage) = with(binding) {
             Glide.with(root).load(footage.previewUrl).into(footageImage)
         }
     }
@@ -33,9 +33,8 @@ class FootageListAdapter : RecyclerView.Adapter<FootageListAdapter.FootageViewHo
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateFootage(newPictures: List<FootageDataResponse>) {
+    fun updateFootage(newPictures: List<Footage>) {
         footage = newPictures
         notifyDataSetChanged()
-
     }
 }
