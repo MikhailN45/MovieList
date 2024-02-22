@@ -4,28 +4,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.movielist.data.MovieDataResponse
+import com.application.movielist.domain.interactors.MovieInteractor
+import com.application.movielist.states.MovieDetailsUiState
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ExperimentalSerializationApi
 
-class ViewModelMovieDetails() : ViewModel() {
-    private var _movieLiveData: MutableLiveData<MovieDataResponse> = MutableLiveData<MovieDataResponse>()
-    val movieLiveData: LiveData<MovieDataResponse>
-        get() = _movieLiveData
+class ViewModelMovieDetails(private val interactor: MovieInteractor) : ViewModel() {
+    private val _state = MutableLiveData<MovieDetailsUiState>()
+    val state: LiveData<MovieDetailsUiState> = _state
 
-    private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val loadingLiveData: LiveData<Boolean>
-        get() = _loadingLiveData
+    private var movieId: Int = 0
+        set(value) {
+            field = value
+            getMovie()
+        }
 
-    @ExperimentalSerializationApi
-    fun getMovie(movieId: Int) {
+
+    private fun getMovie() {
         viewModelScope.launch {
-            _loadingLiveData.value = true
-            val movies = getMovieDetails()
-            movies.singleOrNull { it.id = movieId }.let {
-                _movieLiveData.value = it
+            _state.value = MovieDetailsUiState.Loading
+            try {
+                val filmInfo = interactor.getFilmDetails(movieId)
+                MovieDetailsUiState.Success(filmInfo)
+            } catch (exception: Exception) {
+                _state.value = MovieDetailsUiState.Error
             }
-            _loadingLiveData.value = false
         }
     }
 }
