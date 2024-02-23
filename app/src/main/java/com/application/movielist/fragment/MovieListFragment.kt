@@ -45,13 +45,14 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
         viewModel = ViewModelProvider(this, viewModelFactory)[ViewModelMovieList::class.java]
         viewModel.getMovies()
         recyclerView = binding.movieListRv
-        recyclerView.let {
-            it.layoutManager = GridLayoutManager(requireContext(), 2)
-            it.adapter = MovieListAdapter(this)
-        }
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.adapter = MovieListAdapter(this)
+
+
         viewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (recyclerView.adapter as MovieListAdapter).submitList(viewModel.movieListLiveData.value)
         }
+
         viewModel.loadingLiveData.observe(viewLifecycleOwner) {
             progressBar?.visibility = if (it) View.VISIBLE else View.GONE
         }

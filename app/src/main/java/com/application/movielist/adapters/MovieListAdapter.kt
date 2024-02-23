@@ -15,6 +15,10 @@ import com.bumptech.glide.Glide
 class MovieListAdapter(private val movieClickListener: MovieClickListener) :
     ListAdapter<MovieData, MovieListAdapter.MovieViewHolder>(DiffCallback()) {
 
+    interface MovieClickListener {
+        fun onMovieClick(movie: MovieData)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ViewHolderMovieBinding.inflate(inflater, parent, false)
@@ -26,30 +30,26 @@ class MovieListAdapter(private val movieClickListener: MovieClickListener) :
         holder.bind(item)
     }
 
-    interface MovieClickListener {
-        fun onMovieClick(movie: MovieData)
-    }
-
-
     class MovieViewHolder(
         private val clickListener: MovieClickListener,
         private val binding: ViewHolderMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(movie: MovieData) = with(binding) {
-            Glide
-                .with(binding.root)
-                .load(movie.posterUrl)
-                .into(moviePreview)
-            ageRating.setImageResource(Utils.getAgeRatingImg(movie.ratingAgeLimits))
-            like.setImageResource(R.drawable.like)
-            cardName.text = movie.nameRu
-            ratingBar.rating = movie.ratingKinopoisk / 2
-            tagLine.text = Utils.getTags(movie.genres)
-            reviews.text = "${movie.ratingKinopoiskVoteCount} REVIEWS"
-            minutes.text = "${movie.filmLength} MIN"
-            movieClick.setOnClickListener { clickListener.onMovieClick(movie) }
-        }
+        fun bind(movie: MovieData) =
+            with(binding) {
+                Glide
+                    .with(binding.root)
+                    .load(movie.posterUrl)
+                    .into(moviePreview)
+                ageRating.setImageResource(Utils.getAgeRatingImg(movie.ratingAgeLimits))
+                like.setImageResource(R.drawable.like)
+                cardName.text = movie.nameRu
+                ratingBar.rating = movie.ratingKinopoisk / 2
+                tagLine.text = Utils.getTags(movie.genres)
+                reviews.text = "${movie.ratingKinopoiskVoteCount} REVIEWS"
+                minutes.text = "${movie.filmLength} MIN"
+                movieClick.setOnClickListener { clickListener.onMovieClick(movie) }
+            }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<MovieData>() {
