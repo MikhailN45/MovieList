@@ -44,10 +44,20 @@ class MovieDetailsFragment : Fragment() {
 
         viewModel.getMovie(movieId!!)
 
-        viewModel.footageLiveData.observe(viewLifecycleOwner) { movie: FootageList ->
+        viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageList ->
             with(binding) {
-                if (movie.pictures.isEmpty())
+                if (footage.items.isEmpty()) {
                     footageTitle.visibility = View.GONE
+                } else {
+                    //TODO(extract rv)
+                    footageListRv.apply {
+                        adapter = footageListAdapter
+                        layoutManager =
+                            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+                    }
+                    footageListAdapter.updateFootage(footage.items)
+                }
+
             }
 
             viewModel.loadingLiveData.observe(viewLifecycleOwner) {
@@ -60,11 +70,7 @@ class MovieDetailsFragment : Fragment() {
             with(binding) {
                 backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
 
-                footageListRv.apply {
-                    adapter = footageListAdapter
-                    layoutManager =
-                        LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-                }
+
 
                 Glide.with(root).load(movie.posterUrl).into(mask)
                 movieTitle.text = movie.nameRu
@@ -72,7 +78,7 @@ class MovieDetailsFragment : Fragment() {
                 storylineTv.text = movie.shortDescription
                 val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
                 reviewsCount.text = reviewsCountText
-                footageListAdapter.updateFootage(movie.footage)
+
             }
         }
     }

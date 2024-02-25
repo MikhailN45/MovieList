@@ -7,27 +7,30 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.application.movielist.data.MovieData
 import com.application.movielist.repository.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ViewModelMovieList(private val repository: Repository) : ViewModel() {
     private var _movieListLiveData: MutableLiveData<List<MovieData>> = MutableLiveData()
-    val movieListLiveData: LiveData<List<MovieData>>
-        get() = _movieListLiveData
+    val movieListLiveData: LiveData<List<MovieData>> = _movieListLiveData
 
     private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val loadingLiveData: LiveData<Boolean>
-        get() = _loadingLiveData
+    val loadingLiveData: LiveData<Boolean> = _loadingLiveData
 
     fun getMovies() {
         viewModelScope.launch {
-            _loadingLiveData.postValue(true)
+            _loadingLiveData.value = true
             try {
-                _movieListLiveData.postValue(repository.getActualMovies().result)
-            }
-            catch (exception: Exception) {
+                withContext(Dispatchers.IO) {
+                    _movieListLiveData.postValue(repository.getActualMovies().result)
+                }
+
+            } catch (exception: Exception) {
                 Log.d("TAG", exception.toString())
             }
-            _loadingLiveData.postValue(false)
+            _loadingLiveData.value = false
         }
     }
 }

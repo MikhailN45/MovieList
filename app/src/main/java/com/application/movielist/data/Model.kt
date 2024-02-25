@@ -1,17 +1,18 @@
 package com.application.movielist.data
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieData(
-    val kinopoiskId: Int,
+    val filmId: Int,
     val posterUrl: String,
-    val ratingAgeLimits: String,
+    val ratingAgeLimits: String? = null,
     val genres: List<Genre>,
     val ratingKinopoisk: Float,
     val ratingKinopoiskVoteCount: Int,
     val nameRu: String,
-    val filmLength: Int
+    val filmLength: String
 )
 
 @Serializable
@@ -38,10 +39,11 @@ data class Footage(
 
 @Serializable
 data class MoviesList(
+    @SerializedName("films")
     val result: List<MovieData>
 )
 
 @Serializable
 data class FootageList(
-    val pictures: List<Footage>
+    val items: List<Footage>
 )

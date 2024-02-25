@@ -12,8 +12,10 @@ import com.application.movielist.databinding.ViewHolderMovieBinding
 import com.application.movielist.utils.Utils
 import com.bumptech.glide.Glide
 
-class MovieListAdapter(private val movieClickListener: MovieClickListener) :
+class MovieListAdapter :
     ListAdapter<MovieData, MovieListAdapter.MovieViewHolder>(DiffCallback()) {
+
+    var movieClickListener: MovieClickListener? = null
 
     interface MovieClickListener {
         fun onMovieClick(movie: MovieData)
@@ -22,7 +24,7 @@ class MovieListAdapter(private val movieClickListener: MovieClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ViewHolderMovieBinding.inflate(inflater, parent, false)
-        return MovieViewHolder(movieClickListener, binding)
+        return MovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -30,8 +32,7 @@ class MovieListAdapter(private val movieClickListener: MovieClickListener) :
         holder.bind(item)
     }
 
-    class MovieViewHolder(
-        private val clickListener: MovieClickListener,
+    inner class MovieViewHolder(
         private val binding: ViewHolderMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
@@ -48,7 +49,7 @@ class MovieListAdapter(private val movieClickListener: MovieClickListener) :
                 tagLine.text = Utils.getTags(movie.genres)
                 reviews.text = "${movie.ratingKinopoiskVoteCount} REVIEWS"
                 minutes.text = "${movie.filmLength} MIN"
-                movieClick.setOnClickListener { clickListener.onMovieClick(movie) }
+                movieClick.setOnClickListener { movieClickListener?.onMovieClick(movie) }
             }
     }
 

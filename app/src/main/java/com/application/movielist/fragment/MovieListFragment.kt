@@ -16,12 +16,13 @@ import com.application.movielist.repository.Repository
 import com.application.movielist.viewmodels.MovieListViewModelFactory
 import com.application.movielist.viewmodels.ViewModelMovieList
 
-class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
+class MovieListFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: ViewModelMovieList
     private var progressBar: View? = null
+    private val adapter = MovieListAdapter()
 
     companion object {
         const val TAG = "MovieListFragment"
@@ -40,17 +41,18 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setMovieClickListener()
         val repository = Repository()
         val viewModelFactory = MovieListViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[ViewModelMovieList::class.java]
         viewModel.getMovies()
         recyclerView = binding.movieListRv
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.adapter = MovieListAdapter(this)
+        recyclerView.adapter = adapter
 
 
         viewModel.movieListLiveData.observe(viewLifecycleOwner) {
-            (recyclerView.adapter as MovieListAdapter).submitList(viewModel.movieListLiveData.value)
+            adapter.submitList(it)
         }
 
         viewModel.loadingLiveData.observe(viewLifecycleOwner) {
@@ -58,17 +60,21 @@ class MovieListFragment : Fragment(), MovieListAdapter.MovieClickListener {
         }
     }
 
-    override fun onMovieClick(movie: MovieData) {
-        val bundle = Bundle()
-        bundle.putInt(MOVIE_ID, movie.kinopoiskId)
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .add(
-                R.id.fragment_container_view,
-                MovieDetailsFragment.newInstance(bundle),
-                MovieDetailsFragment.TAG
-            )
-            .addToBackStack(MovieDetailsFragment.TAG)
-            .commit()
+    private fun setMovieClickListener() {
+        adapter.movieClickListener = object : MovieListAdapter.MovieClickListener {
+            override fun onMovieClick(movie: MovieData) {
+                val bundle = Bundle()
+                bundle.putInt(MOVIE_ID, movie.filmId)
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .add(
+                        R.id.fragment_container_view,
+                        MovieDetailsFragment.newInstance(bundle),
+                        MovieDetailsFragment.TAG
+                    )
+                    .addToBackStack(MovieDetailsFragment.TAG)
+                    .commit()
+            }
+        }
     }
 }
