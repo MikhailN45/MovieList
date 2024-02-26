@@ -10,7 +10,7 @@ data class MovieData(
     val ratingAgeLimits: String? = null,
     val genres: List<Genre>,
     val ratingKinopoisk: Float,
-    val ratingKinopoiskVoteCount: Int,
+    val ratingVoteCount: Int,
     val nameRu: String,
     val filmLength: String
 )

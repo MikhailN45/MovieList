@@ -41,44 +41,39 @@ class MovieDetailsFragment : Fragment() {
         val repository = Repository()
         val viewModelFactory = MovieDetailsViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[ViewModelMovieDetails::class.java]
-
         viewModel.getMovie(movieId!!)
+        binding.footageListRv.apply {
+            adapter = footageListAdapter
+            layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
 
-        viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageList ->
-            with(binding) {
-                if (footage.items.isEmpty()) {
-                    footageTitle.visibility = View.GONE
-                } else {
-                    //TODO(extract rv)
-                    footageListRv.apply {
-                        adapter = footageListAdapter
-                        layoutManager =
-                            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+
+            viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageList ->
+                with(binding) {
+                    if (footage.items.isEmpty()) {
+                        footageTitle.visibility = View.GONE
+                        footageListAdapter.updateFootage(footage.items)
                     }
-                    footageListAdapter.updateFootage(footage.items)
+
                 }
 
+                viewModel.loadingLiveData.observe(viewLifecycleOwner) {
+                    binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+                }
             }
 
-            viewModel.loadingLiveData.observe(viewLifecycleOwner) {
-                binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
 
+            viewModel.movieLiveData.observe(viewLifecycleOwner) { movie: MovieInfo ->
+                with(binding) {
+                    backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
 
-        viewModel.movieLiveData.observe(viewLifecycleOwner) { movie: MovieInfo ->
-            with(binding) {
-                backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
-
-
-
-                Glide.with(root).load(movie.posterUrl).into(mask)
-                movieTitle.text = movie.nameRu
-                ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
-                storylineTv.text = movie.shortDescription
-                val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
-                reviewsCount.text = reviewsCountText
-
+                    Glide.with(root).load(movie.posterUrl).into(mask) // FIXME: fix image size
+                    movieTitle.text = movie.nameRu
+                    ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
+                    storylineTv.text = movie.shortDescription // FIXME: check not displayed
+                    val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
+                    reviewsCount.text = reviewsCountText
+                }
             }
         }
     }

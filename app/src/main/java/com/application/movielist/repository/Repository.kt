@@ -6,7 +6,6 @@ import com.application.movielist.data.MoviesList
 import com.application.movielist.data.network.RetrofitInstance
 
 class Repository {
-
     suspend fun getActualMovies(): MoviesList = RetrofitInstance.api.getActualMovies()
 
     suspend fun getMovieDetails(id: Int): MovieInfo = RetrofitInstance.api.getMovieDetails(id)

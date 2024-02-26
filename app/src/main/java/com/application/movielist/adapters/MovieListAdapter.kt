@@ -10,6 +10,8 @@ import com.application.movielist.R
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.ViewHolderMovieBinding
 import com.application.movielist.utils.Utils
+import com.application.movielist.utils.Utils.getRating
+import com.application.movielist.utils.Utils.getTags
 import com.bumptech.glide.Glide
 
 class MovieListAdapter :
@@ -45,10 +47,10 @@ class MovieListAdapter :
                 ageRating.setImageResource(Utils.getAgeRatingImg(movie.ratingAgeLimits))
                 like.setImageResource(R.drawable.like)
                 cardName.text = movie.nameRu
-                ratingBar.rating = movie.ratingKinopoisk / 2
-                tagLine.text = Utils.getTags(movie.genres)
-                reviews.text = "${movie.ratingKinopoiskVoteCount} REVIEWS"
-                minutes.text = "${movie.filmLength} MIN"
+                ratingBar.rating = getRating(movie.ratingKinopoisk) // FIXME: check value
+                tagLine.text = getTags(movie.genres)
+                reviews.text = "${movie.ratingVoteCount} REVIEWS" // FIXME: check if null
+                minutes.text = movie.filmLength // FIXME: check if null
                 movieClick.setOnClickListener { movieClickListener?.onMovieClick(movie) }
             }
     }
