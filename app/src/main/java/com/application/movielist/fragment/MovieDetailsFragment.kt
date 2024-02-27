@@ -15,6 +15,7 @@ import com.application.movielist.data.MovieInfo
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.application.movielist.repository.Repository
 import com.application.movielist.utils.Utils
+import com.application.movielist.utils.Utils.getTags
 import com.application.movielist.viewmodels.MovieDetailsViewModelFactory
 import com.application.movielist.viewmodels.ViewModelMovieDetails
 import com.bumptech.glide.Glide
@@ -66,9 +67,11 @@ class MovieDetailsFragment : Fragment() {
             viewModel.movieLiveData.observe(viewLifecycleOwner) { movie: MovieInfo ->
                 with(binding) {
                     backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
-
-                    Glide.with(root).load(movie.posterUrl).into(mask) // FIXME: fix image size
+                    Glide.with(root)
+                        .load(movie.posterUrl)
+                        .into(mask)
                     movieTitle.text = movie.nameRu
+                    movieGenres.text = getTags(movie.genres)
                     ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
                     storylineTv.text = movie.shortDescription // FIXME: check not displayed
                     reviewsCount.text = Utils.getReviewsForInfo(movie)

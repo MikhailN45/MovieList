@@ -14,16 +14,13 @@
         <ImageView
             android:id="@+id/mask"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginBottom="514dp"
+            android:layout_height="560dp"
             android:alpha="0.3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="ContentDescription"
+            android:contentDescription="@string/film_poster"
             tools:src="@drawable/mask" />
 
         <ImageView
@@ -87,16 +84,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="300dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto_bold"
             android:textColor="@color/textColorWhite"
             android:textFontWeight="900"
             android:textSize="40sp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mask"
             tools:targetApi="p"
             tools:text="@string/avengers_end_game_title" />
 
@@ -110,7 +105,6 @@
             android:textColor="@color/textColorRed"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_title"
             tools:text="@string/action_adventure_fantasy_genre" />

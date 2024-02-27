@@ -49,7 +49,7 @@ class MovieListAdapter :
                 ratingBar.rating = getRating(movie.ratingKinopoisk) // FIXME: check value
                 tagLine.text = getTags(movie.genres)
                 reviews.text = getReviews(movie)
-                minutes.text = movie.filmLength // FIXME: check if null
+                minutes.text = movie.filmLength
                 movieClick.setOnClickListener { movieClickListener?.onMovieClick(movie) }
             }
     }

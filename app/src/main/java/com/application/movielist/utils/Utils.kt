@@ -38,7 +38,6 @@ object Utils {
             "${count}${reviewsText}"
     }
 
-
     fun getAgeRatingImg(minimumAge: String?): Int =
         if (minimumAge == "age16") R.drawable.rating16 else R.drawable.rating13
 
