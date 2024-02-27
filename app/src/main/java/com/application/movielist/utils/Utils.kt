@@ -6,14 +6,15 @@ import com.application.movielist.data.MovieData
 import com.application.movielist.data.MovieInfo
 
 object Utils {
-
-    fun getTags(genres: List<Genre>): String = genres.joinToString(", ") { it.genre }
+    fun getTags(genres: List<Genre>): String = genres.take(2).joinToString(", ") {
+        it.genre.replaceFirstChar(Char::titlecase)
+    }
 
     fun getRating(rating: String): Float {
         val ratingBarNumber: Float = when {
             rating.isEmpty() -> 0F
             rating.contains("%") -> rating.dropLast(1).toFloat() / 20
-            else -> rating.toFloat()/2
+            else -> rating.toFloat() / 2
         }
         return ratingBarNumber
     }
