@@ -1,6 +1,5 @@
 package com.application.movielist.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +10,7 @@ import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.ViewHolderMovieBinding
 import com.application.movielist.utils.Utils
 import com.application.movielist.utils.Utils.getRating
+import com.application.movielist.utils.Utils.getReviews
 import com.application.movielist.utils.Utils.getTags
 import com.bumptech.glide.Glide
 
@@ -37,7 +37,6 @@ class MovieListAdapter :
     inner class MovieViewHolder(
         private val binding: ViewHolderMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
         fun bind(movie: MovieData) =
             with(binding) {
                 Glide
@@ -49,7 +48,7 @@ class MovieListAdapter :
                 cardName.text = movie.nameRu
                 ratingBar.rating = getRating(movie.ratingKinopoisk) // FIXME: check value
                 tagLine.text = getTags(movie.genres)
-                reviews.text = "${movie.ratingVoteCount} REVIEWS" // FIXME: check if null
+                reviews.text = getReviews(movie)
                 minutes.text = movie.filmLength // FIXME: check if null
                 movieClick.setOnClickListener { movieClickListener?.onMovieClick(movie) }
             }

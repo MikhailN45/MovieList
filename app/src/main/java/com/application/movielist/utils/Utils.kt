@@ -2,6 +2,8 @@ package com.application.movielist.utils
 
 import com.application.movielist.R
 import com.application.movielist.data.Genre
+import com.application.movielist.data.MovieData
+import com.application.movielist.data.MovieInfo
 
 object Utils {
 
@@ -9,11 +11,31 @@ object Utils {
 
     fun getRating(rating: Any): Float {
         val ratingBarNumber: Float = when (rating) {
-            (rating is Float) -> rating.toString().toFloat()/2
-            (rating is String) -> rating.toString().dropLast(1).toFloat()/20
+            (rating is Float) -> rating.toString().toFloat() / 2
+            (rating is String) -> rating.toString().dropLast(1).toFloat() / 20
             else -> 0F
         }
         return ratingBarNumber
+    }
+
+    fun getReviews(movie: MovieData): String {
+        val count = movie.ratingVoteCount
+        val reviewsText = " REVIEWS"
+        val emptyReviewsText = "NO REVIEWS"
+        return if (count == 0) {
+            emptyReviewsText
+        } else
+            "${count}${reviewsText}"
+    }
+
+    fun getReviewsForInfo(movie: MovieInfo): String {
+        val count = movie.ratingKinopoiskVoteCount
+        val reviewsText = " REVIEWS"
+        val emptyReviewsText = "NO REVIEWS"
+        return if (count == 0) {
+            emptyReviewsText
+        } else
+            "${count}${reviewsText}"
     }
 
 

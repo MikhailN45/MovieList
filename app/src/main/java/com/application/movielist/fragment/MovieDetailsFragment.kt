@@ -71,8 +71,7 @@ class MovieDetailsFragment : Fragment() {
                     movieTitle.text = movie.nameRu
                     ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
                     storylineTv.text = movie.shortDescription // FIXME: check not displayed
-                    val reviewsCountText = "${movie.ratingKinopoiskVoteCount} REVIEWS"
-                    reviewsCount.text = reviewsCountText
+                    reviewsCount.text = Utils.getReviewsForInfo(movie)
                 }
             }
         }
