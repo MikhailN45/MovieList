@@ -73,7 +73,7 @@ class MovieDetailsFragment : Fragment() {
                     movieTitle.text = movie.nameRu
                     movieGenres.text = getTags(movie.genres)
                     ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
-                    storylineTv.text = movie.shortDescription // FIXME: check not displayed
+                    storylineTv.text = movie.description
                     reviewsCount.text = Utils.getReviewsForInfo(movie)
                 }
             }

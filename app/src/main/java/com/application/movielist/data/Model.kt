@@ -23,7 +23,7 @@ data class MovieInfo(
     val genres: List<Genre>,
     val ratingKinopoiskVoteCount: Int,
     val ratingAgeLimits: String,
-    val shortDescription: String,
+    val description: String,
     val footage: List<Footage>
 )
 

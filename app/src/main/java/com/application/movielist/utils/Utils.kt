@@ -21,7 +21,7 @@ object Utils {
     fun getReviews(movie: MovieData): String {
         val count = movie.ratingVoteCount
         val reviewsText = " REVIEWS"
-        val emptyReviewsText = "NO REVIEWS"
+        val emptyReviewsText = ""
         return if (count == 0) {
             emptyReviewsText
         } else
@@ -31,7 +31,7 @@ object Utils {
     fun getReviewsForInfo(movie: MovieInfo): String {
         val count = movie.ratingKinopoiskVoteCount
         val reviewsText = " REVIEWS"
-        val emptyReviewsText = "NO REVIEWS"
+        val emptyReviewsText = ""
         return if (count == 0) {
             emptyReviewsText
         } else
