@@ -46,7 +46,7 @@ class MovieListAdapter :
                 ageRating.setImageResource(Utils.getAgeRatingImg(movie.ratingAgeLimits))
                 like.setImageResource(R.drawable.like)
                 cardName.text = movie.nameRu
-                ratingBar.rating = getRating(movie.ratingKinopoisk) // FIXME: check value
+                ratingBar.rating = getRating(movie.rating) // FIXME: check value
                 tagLine.text = getTags(movie.genres)
                 reviews.text = getReviews(movie)
                 minutes.text = movie.filmLength

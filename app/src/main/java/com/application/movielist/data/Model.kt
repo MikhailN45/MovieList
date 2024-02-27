@@ -9,7 +9,7 @@ data class MovieData(
     val posterUrl: String,
     val ratingAgeLimits: String? = null,
     val genres: List<Genre>,
-    val ratingKinopoisk: Float,
+    val rating: String,
     val ratingVoteCount: Int,
     val nameRu: String,
     val filmLength: String

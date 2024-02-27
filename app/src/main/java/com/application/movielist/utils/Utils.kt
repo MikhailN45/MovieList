@@ -9,11 +9,11 @@ object Utils {
 
     fun getTags(genres: List<Genre>): String = genres.joinToString(", ") { it.genre }
 
-    fun getRating(rating: Any): Float {
-        val ratingBarNumber: Float = when (rating) {
-            (rating is Float) -> rating.toString().toFloat() / 2
-            (rating is String) -> rating.toString().dropLast(1).toFloat() / 20
-            else -> 0F
+    fun getRating(rating: String): Float {
+        val ratingBarNumber: Float = when {
+            rating.isEmpty() -> 0F
+            rating.contains("%") -> rating.dropLast(1).toFloat() / 20
+            else -> rating.toFloat()/2
         }
         return ratingBarNumber
     }
