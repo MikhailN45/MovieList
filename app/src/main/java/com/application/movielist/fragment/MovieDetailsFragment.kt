@@ -52,8 +52,9 @@ class MovieDetailsFragment : Fragment() {
 
             viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageList ->
                 with(binding) {
-                    if (footage.items.isNotEmpty())
+                    if (footage.items.isNotEmpty()) {
                         footageTitle.visibility = View.VISIBLE
+                    }
                         footageListAdapter.updateFootage(footage.items)
                 }
 

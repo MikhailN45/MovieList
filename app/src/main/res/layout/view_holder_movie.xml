@@ -115,7 +115,7 @@
         app:layout_constraintTop_toTopOf="@id/ratingBar" />
 
     <TextView
-        android:id="@+id/tagLine"
+        android:id="@+id/tag_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -128,7 +128,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
-        android:id="@+id/movieClick"
+        android:id="@+id/movie_click"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/minutes"

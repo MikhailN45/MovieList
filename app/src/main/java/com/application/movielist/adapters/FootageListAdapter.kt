@@ -8,17 +8,9 @@ import com.application.movielist.data.Footage
 import com.application.movielist.databinding.ViewHolderFootageBinding
 import com.bumptech.glide.Glide
 
-class FootageListAdapter : RecyclerView.Adapter<FootageListAdapter.FootageViewHolder>() {
+class FootageListAdapter : RecyclerView.Adapter<FootageViewHolder>() {
 
     private var footage: List<Footage> = listOf()
-
-    class FootageViewHolder(private val binding: ViewHolderFootageBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(footage: Footage) = with(binding) {
-            Glide.with(root).load(footage.previewUrl).into(footageImage)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FootageViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -36,5 +28,12 @@ class FootageListAdapter : RecyclerView.Adapter<FootageListAdapter.FootageViewHo
     fun updateFootage(newPictures: List<Footage>) {
         footage = newPictures
         notifyDataSetChanged()
+    }
+}
+
+class FootageViewHolder(private val binding: ViewHolderFootageBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(footage: Footage) = with(binding) {
+        Glide.with(root).load(footage.previewUrl).into(footageImage)
     }
 }
