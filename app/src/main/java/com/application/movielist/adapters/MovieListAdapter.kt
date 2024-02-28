@@ -1,6 +1,7 @@
 package com.application.movielist.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -45,11 +46,15 @@ class MovieListAdapter :
                 yearText.text = movie.year
                 like.setImageResource(R.drawable.like)
                 cardName.text = movie.nameRu
-                ratingBar.rating = getRating(movie.rating)
+                ratingText.text = getRating(movie.rating)
                 tagLine.text = getTags(movie.genres)
                 reviews.text = getReviews(movie)
                 minutes.text = movie.filmLength
+
                 movieClick.setOnClickListener { movieClickListener?.onMovieClick(movie) }
+                if (ratingText.text == null) ratingText.visibility = View.GONE
+                if (minutes.text == null) minutes.visibility = View.GONE
+                if (reviews.text == null) reviews.visibility = View.GONE
             }
     }
 

@@ -9,13 +9,13 @@ object Utils {
         it.genre.replaceFirstChar(Char::titlecase)
     }
 
-    fun getRating(rating: String): Float {
-        val ratingBarNumber: Float = when {
-            rating.isEmpty() -> 0F
-            rating.contains("%") -> rating.dropLast(1).toFloat() / 20
-            else -> rating.toFloat() / 2
+    fun getRating(rating: String): String {
+        val ratingBarNumber: Float? = when {
+            rating.isEmpty() -> null
+            rating.contains("%") -> rating.dropLast(1).toFloat() / 10
+            else -> rating.toFloat()
         }
-        return ratingBarNumber
+        return ratingBarNumber.toString()
     }
 
     fun getReviews(movie: MovieData): String {

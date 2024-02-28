@@ -193,7 +193,7 @@
         android:contentDescription="@string/back_button_text"
         android:elevation="8dp"
         android:focusable="true"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="@color/textColorRed"
         app:fabSize="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
