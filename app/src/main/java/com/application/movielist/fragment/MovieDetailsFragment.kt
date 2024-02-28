@@ -55,7 +55,7 @@ class MovieDetailsFragment : Fragment() {
                     if (footage.items.isNotEmpty()) {
                         footageTitle.visibility = View.VISIBLE
                     }
-                        footageListAdapter.updateFootage(footage.items)
+                    footageListAdapter.updateFootage(footage.items)
                 }
 
                 viewModel.loadingLiveData.observe(viewLifecycleOwner) {
@@ -75,6 +75,8 @@ class MovieDetailsFragment : Fragment() {
                     ageRating.text = getAgeRating(movie.ratingAgeLimits)
                     storylineTv.text = movie.description
                     reviewsCount.text = getReviewsForInfo(movie)
+
+                    if (ageRating.text.isEmpty()) blackRectangle.visibility = View.GONE
                 }
             }
         }

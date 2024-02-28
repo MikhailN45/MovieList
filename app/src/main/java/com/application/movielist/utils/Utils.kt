@@ -38,8 +38,12 @@ object Utils {
             "${count}${reviewsText}"
     }
 
-    fun getAgeRating(minimumAge: String): String {
-        val ageRating: String = minimumAge.drop(3)
-        return ageRating.plus("+")
+    fun getAgeRating(minimumAge: String?): String {
+        return if (minimumAge != null) {
+            val ageRating: String = minimumAge.drop(3)
+            ageRating.plus("+")
+        } else ""
+
+
     }
 }
