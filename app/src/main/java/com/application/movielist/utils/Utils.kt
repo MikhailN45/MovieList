@@ -1,6 +1,5 @@
 package com.application.movielist.utils
 
-import com.application.movielist.R
 import com.application.movielist.data.Genre
 import com.application.movielist.data.MovieData
 import com.application.movielist.data.MovieInfo
@@ -39,10 +38,8 @@ object Utils {
             "${count}${reviewsText}"
     }
 
-    fun getAgeRatingImg(minimumAge: String?): Int =
-        if (minimumAge == "age16") R.drawable.rating16 else R.drawable.rating13
-
-    fun getRatingStringInt(minimumAge: String): String {
-        return if (minimumAge == "age16") "16+" else "13+"
+    fun getAgeRating(minimumAge: String): String {
+        val ageRating: String = minimumAge.drop(3)
+        return ageRating.plus("+")
     }
 }

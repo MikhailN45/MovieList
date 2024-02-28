@@ -15,6 +15,8 @@ import com.application.movielist.data.MovieInfo
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.application.movielist.repository.Repository
 import com.application.movielist.utils.Utils
+import com.application.movielist.utils.Utils.getAgeRating
+import com.application.movielist.utils.Utils.getReviewsForInfo
 import com.application.movielist.utils.Utils.getTags
 import com.application.movielist.viewmodels.MovieDetailsViewModelFactory
 import com.application.movielist.viewmodels.ViewModelMovieDetails
@@ -51,11 +53,9 @@ class MovieDetailsFragment : Fragment() {
 
             viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageList ->
                 with(binding) {
-                    if (footage.items.isEmpty()) {
-                        footageTitle.visibility = View.GONE
+                    if (footage.items.isNotEmpty())
+                        footageTitle.visibility = View.VISIBLE
                         footageListAdapter.updateFootage(footage.items)
-                    }
-
                 }
 
                 viewModel.loadingLiveData.observe(viewLifecycleOwner) {
@@ -72,14 +72,13 @@ class MovieDetailsFragment : Fragment() {
                         .into(mask)
                     movieTitle.text = movie.nameRu
                     movieGenres.text = getTags(movie.genres)
-                    ageRating13.text = Utils.getRatingStringInt(movie.ratingAgeLimits)
+                    ageRating.text = getAgeRating(movie.ratingAgeLimits)
                     storylineTv.text = movie.description
-                    reviewsCount.text = Utils.getReviewsForInfo(movie)
+                    reviewsCount.text = getReviewsForInfo(movie)
                 }
             }
         }
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class MovieData(
     val filmId: Int,
     val posterUrl: String,
-    val ratingAgeLimits: String? = null,
+    val year: String,
     val genres: List<Genre>,
     val rating: String,
     val ratingVoteCount: Int,

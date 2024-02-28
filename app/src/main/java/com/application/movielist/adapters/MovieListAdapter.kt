@@ -43,10 +43,10 @@ class MovieListAdapter :
                     .with(binding.root)
                     .load(movie.posterUrl)
                     .into(moviePreview)
-                ageRating.setImageResource(Utils.getAgeRatingImg(movie.ratingAgeLimits))
+                yearText.text = movie.year
                 like.setImageResource(R.drawable.like)
                 cardName.text = movie.nameRu
-                ratingBar.rating = getRating(movie.rating) // FIXME: check value
+                ratingBar.rating = getRating(movie.rating)
                 tagLine.text = getTags(movie.genres)
                 reviews.text = getReviews(movie)
                 minutes.text = movie.filmLength

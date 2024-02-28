@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.core.widget.NestedScrollView
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#191926">
+    android:background="@color/movie_list_back">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,68 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="560dp"
             android:alpha="0.3"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/film_poster"
-            tools:src="@drawable/mask" />
-
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="6dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="60dp"
-            android:contentDescription="@string/back_button_text"
-            android:src="@drawable/path"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/back_button_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="56dp"
-            android:fontFamily="@font/roboto_thin"
-            android:text="@string/back_button_text"
-            android:textColor="@color/textColorWhite"
-            android:textFontWeight="300"
-            android:textSize="12sp"
-            android:textStyle="normal"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="p" />
-
-        <ImageView
-            android:id="@+id/black_rectangle"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/rectangle"
-            app:layout_constraintStart_toEndOf="@+id/reviews_count"
-            app:layout_constraintTop_toBottomOf="@+id/movie_genres"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/age_rating_13"
-            android:layout_width="24dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/textColorWhite"
-            android:textFontWeight="900"
-            android:textSize="12sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/black_rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/black_rectangle"
-            app:layout_constraintStart_toStartOf="@+id/black_rectangle"
-            app:layout_constraintTop_toTopOf="@+id/black_rectangle"
-            tools:targetApi="p"
-            tools:text="@string/age_rating_13" />
+            tools:src="@drawable/mask" />
 
         <TextView
             android:id="@+id/movie_title"
@@ -109,19 +57,47 @@
             app:layout_constraintTop_toBottomOf="@+id/movie_title"
             tools:text="@string/action_adventure_fantasy_genre" />
 
+        <ImageView
+            android:id="@+id/black_rectangle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/rectangle"
+            app:layout_constraintBottom_toBottomOf="@id/mask"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/age_rating"
+            android:layout_width="24dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/textColorWhite"
+            android:textFontWeight="900"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/black_rectangle"
+            app:layout_constraintEnd_toEndOf="@+id/black_rectangle"
+            app:layout_constraintStart_toStartOf="@+id/black_rectangle"
+            app:layout_constraintTop_toTopOf="@+id/black_rectangle"
+            tools:targetApi="p"
+            tools:text="@string/age_rating_13" />
 
         <TextView
             android:id="@+id/reviews_count"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="17dp"
             android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/silver"
+            android:textColor="#FF3466"
             android:textFontWeight="900"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movie_genres"
+            app:layout_constraintBottom_toBottomOf="@id/mask"
+            app:layout_constraintStart_toEndOf="@id/age_rating"
             tools:targetApi="p"
             tools:text="@string/reviews_number" />
 
@@ -130,7 +106,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/storyline_raw"
@@ -152,7 +128,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto_thin"
             android:textColor="@color/textColorGray"
-            android:textFontWeight="300"
+            android:textFontWeight="600"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -162,7 +138,6 @@
             tools:targetApi="p"
             tools:text="@string/avengers_storyline" />
 
-
         <TextView
             android:id="@+id/footage_title"
             android:layout_width="match_parent"
@@ -170,7 +145,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="116dp"
-            android:text="@string/cast_title"
+            android:visibility="gone"
+            android:text="@string/movie_footage"
             android:textColor="@color/textColorGray"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -196,9 +172,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back_button_text"
+            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.45"
             tools:visibility="visible" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/back_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:clickable="true"
+        android:contentDescription="@string/back_button_text"
+        android:elevation="8dp"
+        android:focusable="true"
+        app:backgroundTint="@color/white"
+        app:fabSize="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/textColorRed"
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
+</RelativeLayout>
 
