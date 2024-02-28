@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
 import com.application.movielist.data.MovieData
 import com.application.movielist.databinding.ViewHolderMovieBinding
-import com.application.movielist.utils.Utils
 import com.application.movielist.utils.Utils.getRating
 import com.application.movielist.utils.Utils.getReviews
 import com.application.movielist.utils.Utils.getTags

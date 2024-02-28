@@ -14,7 +14,6 @@ import com.application.movielist.data.FootageList
 import com.application.movielist.data.MovieInfo
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.application.movielist.repository.Repository
-import com.application.movielist.utils.Utils
 import com.application.movielist.utils.Utils.getAgeRating
 import com.application.movielist.utils.Utils.getReviewsForInfo
 import com.application.movielist.utils.Utils.getTags
