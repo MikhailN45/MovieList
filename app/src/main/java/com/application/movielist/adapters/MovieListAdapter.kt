@@ -44,7 +44,7 @@ class MovieListAdapter :
                     .load(movie.posterUrl)
                     .into(moviePreview)
                 yearText.text = movie.year
-                like.setImageResource(R.drawable.like)
+                like.setImageResource(R.drawable.like_gray)
                 cardName.text = movie.nameRu
                 ratingText.text = getRating(movie.rating)
                 tagLine.text = getTags(movie.genres)
