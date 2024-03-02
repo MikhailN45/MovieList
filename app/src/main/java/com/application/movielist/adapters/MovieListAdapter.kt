@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
-import com.application.movielist.data.MovieData
+import com.application.movielist.data.MovieDataResponse
 import com.application.movielist.databinding.ViewHolderMovieBinding
 import com.application.movielist.utils.Utils.getRating
 import com.application.movielist.utils.Utils.getReviews
@@ -15,12 +15,12 @@ import com.application.movielist.utils.Utils.getTags
 import com.bumptech.glide.Glide
 
 class MovieListAdapter :
-    ListAdapter<MovieData, MovieListAdapter.MovieViewHolder>(DiffCallback()) {
+    ListAdapter<MovieDataResponse, MovieListAdapter.MovieViewHolder>(DiffCallback()) {
 
     var movieClickListener: MovieClickListener? = null
 
     interface MovieClickListener {
-        fun onMovieClick(movie: MovieData)
+        fun onMovieClick(movie: MovieDataResponse)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -37,7 +37,7 @@ class MovieListAdapter :
     inner class MovieViewHolder(
         private val binding: ViewHolderMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: MovieData) =
+        fun bind(movie: MovieDataResponse) =
             with(binding) {
                 Glide
                     .with(binding.root)
@@ -47,7 +47,7 @@ class MovieListAdapter :
                 like.setImageResource(R.drawable.like_gray)
                 cardName.text = movie.nameRu
                 ratingText.text = getRating(movie.rating)
-                tagLine.text = getTags(movie.genres)
+                tagLine.text = getTags(movie.genreResponses)
                 reviews.text = getReviews(movie)
                 minutes.text = movie.filmLength
 
@@ -58,12 +58,12 @@ class MovieListAdapter :
             }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<MovieData>() {
-        override fun areItemsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<MovieDataResponse>() {
+        override fun areItemsTheSame(oldItem: MovieDataResponse, newItem: MovieDataResponse): Boolean {
             return oldItem.nameRu == newItem.nameRu
         }
 
-        override fun areContentsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
+        override fun areContentsTheSame(oldItem: MovieDataResponse, newItem: MovieDataResponse): Boolean {
             return oldItem == newItem
         }
     }

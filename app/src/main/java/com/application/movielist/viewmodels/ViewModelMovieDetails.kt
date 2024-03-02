@@ -5,19 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.movielist.data.FootageList
-import com.application.movielist.data.MovieInfo
+import com.application.movielist.data.FootageListResponse
+import com.application.movielist.data.MovieInfoResponse
 import com.application.movielist.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ViewModelMovieDetails(private val repository: Repository) : ViewModel() {
-    private var _movieLiveData: MutableLiveData<MovieInfo> = MutableLiveData<MovieInfo>()
-    val movieLiveData: LiveData<MovieInfo> = _movieLiveData
+    private var _movieLiveData: MutableLiveData<MovieInfoResponse> = MutableLiveData<MovieInfoResponse>()
+    val movieLiveData: LiveData<MovieInfoResponse> = _movieLiveData
 
-    private var _footageLiveData: MutableLiveData<FootageList> = MutableLiveData<FootageList>()
-    val footageLiveData: LiveData<FootageList> = _footageLiveData
+    private var _footageLiveData: MutableLiveData<FootageListResponse> = MutableLiveData<FootageListResponse>()
+    val footageLiveData: LiveData<FootageListResponse> = _footageLiveData
 
     private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val loadingLiveData: LiveData<Boolean> = _loadingLiveData

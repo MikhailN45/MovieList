@@ -1,14 +1,14 @@
 package com.application.movielist.repository
 
-import com.application.movielist.data.FootageList
-import com.application.movielist.data.MovieInfo
-import com.application.movielist.data.MoviesList
+import com.application.movielist.data.FootageListResponse
+import com.application.movielist.data.MovieInfoResponse
+import com.application.movielist.data.MoviesListResponse
 import com.application.movielist.data.network.RetrofitInstance
 
 class Repository {
-    suspend fun getActualMovies(): MoviesList = RetrofitInstance.api.getActualMovies()
+    suspend fun getActualMovies(): MoviesListResponse = RetrofitInstance.api.getActualMovies()
 
-    suspend fun getMovieDetails(id: Int): MovieInfo = RetrofitInstance.api.getMovieDetails(id)
+    suspend fun getMovieDetails(id: Int): MovieInfoResponse = RetrofitInstance.api.getMovieDetails(id)
 
-    suspend fun getMovieFootage(id: Int): FootageList = RetrofitInstance.api.getMovieFootage(id)
+    suspend fun getMovieFootage(id: Int): FootageListResponse = RetrofitInstance.api.getMovieFootage(id)
 }

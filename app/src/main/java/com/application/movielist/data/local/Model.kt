@@ -1,14 +1,14 @@
-package com.application.movielist.data
+package com.application.movielist.data.local
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDataResponse(
+data class MovieData(
     val filmId: Int,
     val posterUrl: String,
     val year: String,
-    val genreResponses: List<GenreResponse>,
+    val genreResponses: List<Genre>,
     val rating: String,
     val ratingVoteCount: Int,
     val nameRu: String,
@@ -16,34 +16,34 @@ data class MovieDataResponse(
 )
 
 @Serializable
-data class MovieInfoResponse(
+data class MovieInfo(
     val kinopoiskId: Int,
     val posterUrl: String,
     val nameRu: String,
-    val genreResponses: List<GenreResponse>,
+    val genreResponses: List<Genre>,
     val ratingKinopoiskVoteCount: Int,
     val ratingAgeLimits: String,
     val description: String,
-    val footageResponse: List<FootageResponse>
+    val footageResponse: List<Footage>
 )
 
 @Serializable
-data class GenreResponse(
+data class Genre(
     val genre: String
 )
 
 @Serializable
-data class FootageResponse(
+data class Footage(
     val previewUrl: String
 )
 
 @Serializable
-data class MoviesListResponse(
+data class MoviesList(
     @SerializedName("films")
-    val result: List<MovieDataResponse>
+    val result: List<MovieData>
 )
 
 @Serializable
-data class FootageListResponse(
-    val items: List<FootageResponse>
+data class FootageList(
+    val items: List<Footage>
 )

@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.adapters.FootageListAdapter
-import com.application.movielist.data.FootageList
-import com.application.movielist.data.MovieInfo
+import com.application.movielist.data.FootageListResponse
+import com.application.movielist.data.MovieInfoResponse
 import com.application.movielist.databinding.FragmentMovieDetailsBinding
 import com.application.movielist.repository.Repository
 import com.application.movielist.utils.Utils.getAgeRating
@@ -50,7 +50,7 @@ class MovieDetailsFragment : Fragment() {
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
 
 
-            viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageList ->
+            viewModel.footageLiveData.observe(viewLifecycleOwner) { footage: FootageListResponse ->
                 with(binding) {
                     if (footage.items.isNotEmpty()) {
                         footageTitle.visibility = View.VISIBLE
@@ -64,14 +64,14 @@ class MovieDetailsFragment : Fragment() {
             }
 
 
-            viewModel.movieLiveData.observe(viewLifecycleOwner) { movie: MovieInfo ->
+            viewModel.movieLiveData.observe(viewLifecycleOwner) { movie: MovieInfoResponse ->
                 with(binding) {
                     backButtonText.setOnClickListener { movieDetailsClick?.onBackClick() }
                     Glide.with(root)
                         .load(movie.posterUrl)
                         .into(mask)
                     movieTitle.text = movie.nameRu
-                    movieGenres.text = getTags(movie.genres)
+                    movieGenres.text = getTags(movie.genreResponses)
                     ageRating.text = getAgeRating(movie.ratingAgeLimits)
                     storylineTv.text = movie.description
                     reviewsCount.text = getReviewsForInfo(movie)
