@@ -17,10 +17,10 @@ import com.application.movielist.viewmodels.MovieListViewModelFactory
 import com.application.movielist.viewmodels.ViewModelMovieList
 
 class MovieListFragment : Fragment() {
-
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: ViewModelMovieList
+
     private var progressBar: View? = null
     private val adapter = MovieListAdapter()
 
