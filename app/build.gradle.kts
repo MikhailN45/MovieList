@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("kotlin-kapt")
-
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -51,9 +51,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
@@ -66,21 +64,15 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
-
-
+    ksp ("androidx.room:room-compiler:2.6.1")
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
-    implementation ("io.coil-kt:coil:2.5.0")
     implementation ("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+    ksp ("com.github.bumptech.glide:compiler:4.11.0")
 
     testImplementation("junit:junit:4.13.2")
-
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-
 }
