@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.movielist.R
 import com.application.movielist.adapters.MovieListAdapter
 import com.application.movielist.data.MovieDataResponse
+import com.application.movielist.data.local.AppDatabase
 import com.application.movielist.databinding.FragmentMovieListBinding
 import com.application.movielist.repository.Repository
 import com.application.movielist.viewmodels.MovieListViewModelFactory
@@ -42,8 +43,12 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setMovieClickListener()
+
+        val application = requireNotNull(this.activity).application
+        val datasource = AppDatabase.getDatabase(application).getMovieDao()
         val repository = Repository()
-        val viewModelFactory = MovieListViewModelFactory(repository)
+        val viewModelFactory = MovieListViewModelFactory(repository, datasource)
+
         viewModel = ViewModelProvider(this, viewModelFactory)[ViewModelMovieList::class.java]
         viewModel.getMovies()
         recyclerView = binding.movieListRv

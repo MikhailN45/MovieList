@@ -52,18 +52,25 @@ class MovieListAdapter :
                 minutes.text = movie.filmLength
 
                 movieClick.setOnClickListener { movieClickListener?.onMovieClick(movie) }
-                if (ratingText.text == null) ratingText.visibility = View.GONE
-                if (minutes.text == null) minutes.visibility = View.GONE
-                if (reviews.text == null) reviews.visibility = View.GONE
+                if (ratingText.text == "0") ratingText.visibility = View.GONE
+                if (minutes.text.isNullOrEmpty()) minutes.visibility = View.GONE
+                if (tagLine.text.isNullOrEmpty()) tagLine.visibility = View.GONE
+                if (reviews.text.isNullOrEmpty()) reviews.visibility = View.GONE
             }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<MovieDataResponse>() {
-        override fun areItemsTheSame(oldItem: MovieDataResponse, newItem: MovieDataResponse): Boolean {
+        override fun areItemsTheSame(
+            oldItem: MovieDataResponse,
+            newItem: MovieDataResponse
+        ): Boolean {
             return oldItem.nameRu == newItem.nameRu
         }
 
-        override fun areContentsTheSame(oldItem: MovieDataResponse, newItem: MovieDataResponse): Boolean {
+        override fun areContentsTheSame(
+            oldItem: MovieDataResponse,
+            newItem: MovieDataResponse
+        ): Boolean {
             return oldItem == newItem
         }
     }

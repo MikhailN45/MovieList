@@ -5,13 +5,16 @@ import com.application.movielist.data.MovieDataResponse
 import com.application.movielist.data.MovieInfoResponse
 
 object Utils {
-    fun getTags(genres: List<GenreResponse>): String = genres.take(2).joinToString(", ") {
-        it.genre.replaceFirstChar(Char::titlecase)
+
+    fun getTags(genres: List<GenreResponse>?): String {
+        val genre = genres?.getOrNull(0)?.genre?.replaceFirstChar(Char::titlecase)
+        val emptyGenre = ""
+        return genre ?: emptyGenre
     }
 
-    fun getRating(rating: String): String {
-        val ratingBarNumber: Float? = when {
-            rating.isEmpty() -> null
+    fun getRating(rating: String?): String {
+        val ratingBarNumber: Float = when {
+            rating.isNullOrEmpty() -> 0F
             rating.contains("%") -> rating.dropLast(1).toFloat() / 10
             else -> rating.toFloat()
         }
@@ -43,7 +46,6 @@ object Utils {
             val ageRating: String = minimumAge.drop(3)
             ageRating.plus("+")
         } else ""
-
-
     }
 }
+
